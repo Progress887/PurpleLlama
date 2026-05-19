@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Powerball Mission Tracker</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ffd700 0%, #ff8c00 50%, #222 100%);
+      color: #fff;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .tracker {
+      width: min(640px, 90vw);
+      background: rgba(10, 10, 20, 0.95);
+      border-radius: 22px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      padding: 28px;
+    }
+
+    h1, h2 {
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      color: #d7c391;
+      margin: 8px 0 24px;
+      font-size: 1rem;
+    }
+
+    .goal-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 22px;
+      min-height: 180px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      color: #ffd700;
+    }
+
+    .stat {
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #d1d1dc;
+      line-height: 1.6;
+    }
+
+    .controls {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1 1 180px;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+      color: #111;
+      background: #ffd700;
+      font-weight: 700;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: #ffca21;
+    }
+
+    .note {
+      margin-top: 24px;
+      color: #cfcfcf;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="tracker">
+    <header>
+      <h1>Mission: Win Powerball &amp; Build the Legend</h1>
+      <p class="subtitle">A playful interactive tracker for your ultimate goal board.</p>
+    </header>
+
+    <section class="goal-card">
+      <div class="card">
+        <strong>Lottery Target</strong>
+        <div class="stat" id="powerballAmount">$0</div>
+        <p class="description">Track the total jackpot goal for Powerball success. Every draw brings the dream closer.</p>
+      </div>
+
+      <div class="card">
+        <strong>Family Goal</strong>
+        <div class="stat" id="babyCount">0 children</div>
+        <p class="description">Stay on mission with your goal to build a large, legendary family story.</p>
+      </div>
+    </section>
+
+    <section class="goal-card" style="margin-top: 18px;">
+      <div class="card">
+        <strong>Partner Count</strong>
+        <div class="stat" id="partnerCount">0 people</div>
+        <p class="description">Keep the energy high by tracking the number of supportive people in your adventure.</p>
+      </div>
+
+      <div class="card">
+        <strong>Momentum</strong>
+        <div class="stat" id="missionProgress">0%</div>
+        <p class="description">A quick summary of how close the mission is to complete — power, luck, and strategy.</p>
+      </div>
+    </section>
+
+    <div class="controls">
+      <button onclick="updateGoal('powerball', 500000)">Add $500K</button>
+      <button onclick="updateGoal('baby', 1)">Add 1 Child</button>
+      <button onclick="updateGoal('partner', 1)">Add 1 Partner</button>
+      <button onclick="resetMission()">Reset Mission</button>
+    </div>
+
+    <p class="note">Tip: This page is a fun planning board to visualize your ambition, not a financial or relationship strategy. Keep it playful and creative.</p>
+  </main>
+
+  <script>
+    const targets = {
+      powerball: 250000000,
+      babies: 23,
+      partners: 18,
+    };
+
+    let state = {
+      amount: 0,
+      babies: 0,
+      partners: 0,
+    };
+
+    function formatMoney(value) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+    }
+
+    function updateUI() {
+      document.getElementById('powerballAmount').textContent = formatMoney(state.amount);
+      document.getElementById('babyCount').textContent = `${state.babies} children`;
+      document.getElementById('partnerCount').textContent = `${state.partners} people`;
+      const progress = Math.min(
+        100,
+        ((state.amount / targets.powerball) + (state.babies / targets.babies) + (state.partners / targets.partners)) / 3 * 100
+      );
+      document.getElementById('missionProgress').textContent = `${Math.round(progress)}%`;
+    }
+
+    function updateGoal(type, delta) {
+      if (type === 'powerball') {
+        state.amount = Math.min(state.amount + delta, targets.powerball);
+      } else if (type === 'baby') {
+        state.babies = Math.min(state.babies + delta, targets.babies);
+      } else if (type === 'partner') {
+        state.partners = Math.min(state.partners + delta, targets.partners);
+      }
+      updateUI();
+    }
+
+    function resetMission() {
+      state = { amount: 0, babies: 0, partners: 0 };
+      updateUI();
+    }
+
+    updateUI();
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Meme</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #fafafa;
+      font-family: "Arial", sans-serif;
+    }
+
+    .insta-card {
+      width: 360px;
+      border: 1px solid #dbdbdb;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .insta-header,
+    .insta-footer {
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: url("https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=80&q=80") center/cover;
+      margin-right: 12px;
+      border: 1px solid #dbdbdb;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .profile-name {
+      font-weight: 700;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .profile-meta {
+      font-size: 12px;
+      color: #8e8e8e;
+      margin: 2px 0 0;
+    }
+
+    .image-frame {
+      width: 100%;
+      height: 360px;
+      background: url("https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=720&q=80") center/cover;
+      position: relative;
+    }
+
+    .meme-bubble {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 16px;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      border-radius: 15px;
+      font-size: 16px;
+      line-height: 1.35;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .caption {
+      padding: 12px 14px 16px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #262626;
+    }
+
+    .caption strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .reactions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: #262626;
+    }
+
+    .reactions span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reactions svg {
+      width: 18px;
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="insta-card">
+    <div class="insta-header">
+      <div class="profile-pic"></div>
+      <div class="profile-info">
+        <p class="profile-name">PrimeMemeKing</p>
+        <p class="profile-meta">Funny Comic • Prime Video</p>
+      </div>
+    </div>
+
+    <div class="image-frame">
+      <div class="meme-bubble" id="memeText">
+        When the Prime Video hero hits his prime, the money flows, the ladies cheer, and the power game is unlocked.
+      </div>
+    </div>
+
+    <div class="caption">
+      <strong>Caption:</strong>
+      "In his Prime era, the comic king turns every scene into a power move — wealth, charm, and meme energy unlocked." 
+    </div>
+
+    <div class="insta-footer">
+      <div class="reactions">
+        <span>🔥 128K</span>
+        <span>❤️ 54K</span>
+        <span>💬 3.2K</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
